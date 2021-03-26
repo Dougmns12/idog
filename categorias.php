@@ -114,7 +114,7 @@ if(isset($_SESSION["nome"])){
     if (mysqli_num_rows($result) > 0) {
         while($row = mysqli_fetch_assoc($result)) {
             
-            echo "<li>".$row["nome"]."  | <a class='btn btn-info ' href='editar_categoria.php?id=".$row["idCategoria"]."'>Editar</a> | <a class='btn btn-danger ' href='banco_apagar_categoria.php?id=".$row["idCategoria"]."'>Apagar</a> <li/> ";
+            echo "<li>".$row["nome"]."  | <a class='btn btn-info ' href='editar_categoria.php?id=".$row["idCategoria"]."'>Editar</a> | <a class='btn btn-danger ' href='banco_apagar_categoria.php?id=".$row["idCategoria"]."'>Apagar</a> </li> ";
             echo "<br />";
         }
         desconectar($conn);

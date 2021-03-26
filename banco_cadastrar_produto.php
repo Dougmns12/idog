@@ -6,13 +6,24 @@ if(isset($_SESSION["nome"])){
         $preco = $_POST["preco"];
         $descricao = $_POST["descricao"];
         $idCategoria = $_POST["categoria"];
-        $imagem = $_POST["imagem"];
-
+        $imagem = $FILES["imagem"];
         
+        if(isset($_FILES['imagem']) && !empty($_FILES['imagem']['name'])){
+            $imagem_temp = $_FILES['imagem']['tmp_name'];
+            $destino = 'img/' .$_FILES["imagem"]["name"];
+            move_uploaded_file($imagem_temp, $destino);
+
+            $nome_imagem = $_FILES["imagem"]["name"];
+
+        }else{
+            $nome_imagmem = "sem_imagem.png";
+        }
+    
+
         include 'banco.php';
         $conn = conectar();
 
-        $sql = "INSERT INTO produto (nome, preco, descricao, categoria, imagem) VALUES ('$nome', '$preco', '$descricao','$idCategoria', '$imagem')";
+        $sql = "INSERT INTO produto (nome, preco, descricao, idcategoria, imagem) VALUES ('$nome', '$preco', '$descricao','$idCategoria', '$nome_imagem')";
         $result = mysqli_query($conn, $sql);
         $produto = mysqli_insert_id($conn);
 
@@ -36,7 +47,7 @@ if(isset($_SESSION["nome"])){
                 }
             }
             desconectar($conn);
-            header('Location: produto.php');
+            header('Location: produtos.php');
         } else {
             echo "Error: " . $sql . "<br>" . mysqli_error($conn);
             desconectar($conn);

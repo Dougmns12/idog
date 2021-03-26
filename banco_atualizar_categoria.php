@@ -7,7 +7,6 @@ if(isset($_SESSION["nome"])){
         
         include 'banco.php';
         $conn = conectar();
-
         $sql = "UPDATE categoria SET nome='$nome' WHERE idCategoria=$id";
         $result = mysqli_query($conn, $sql);
 

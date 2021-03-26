@@ -53,15 +53,15 @@
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user" name="senha" id="senha" placeholder="Senha">
                                         </div>
-                                        <input type="submit" value="Login" class="btn btn-primary btn-user btn-block">
+                                        <input type="submit" value="Entrar" class="btn btn-primary btn-user btn-block">
                                     </form>
                                     <hr>
-                                    <div class="text-center">
+                                    <!-- <div class="text-center">
                                         <a class="small" href="404.html">Esqueceu a senha?</a>
                                     </div>
                                     <div class="text-center">
                                         <a class="small" href="404.html">Criar nova conta!</a>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>

@@ -1,6 +1,36 @@
 <?php
 session_start();
 if(isset($_SESSION["nome"])){
+
+
+
+    $id = $_GET["id"];
+
+    include 'banco.php';
+    $conn = conectar();
+
+    $sql = "SELECT * FROM produto WHERE idProduto=$id";
+    $result = mysqli_query($conn, $sql);
+
+    if(mysqli_num_rows($result) > 0){
+        while($row = mysqli_fetch_assoc($result)){
+            $id = $row["idProduto"];
+            $nome = $row["nome"];
+            $descricao = $row["descricao"];
+            $idCategoria = $row["idCategoria"];
+            $preco = $row["preco"];
+            $imagem = $row["imagem"];
+
+        }
+    }else{
+        desconectar($conn);
+        header('location: produtos.php');
+        // $nome = "";
+        // $descricao = "";
+        // $idCategoria = "";
+        // $preco = "";
+        // // $nome = "";
+    }
 ?>
 
 <!DOCTYPE html>
@@ -100,27 +130,34 @@ if(isset($_SESSION["nome"])){
                             </div>
                             <div class="col-lg-6">
                                 <div class="p-5">
-                                    <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Cadastrar produto</h1>
+                                <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">Editar produto</h1>
                                     </div>
-                                    <form action="banco_cadastrar_produto.php" method="post" enctype="multipart/form-data" class="user">
+                                    <form action="banco_editar_produto.php" method="post" enctype="multipart/form-data" class="user">
                                         <div class="form-group">
-                                            <input type="text" class="form-control form-control-user" name="nome" placeholder="Nome do produto">
+                                            <input type="text" class="form-control form-control-user" name="nome" value="<?php echo $nome;?>" placeholder="Nome do produto">
+                                            <input type="hidden" name="id" value="<?php echo $id;?>">
+
                                         </div>
                                         <div class="form-group">
-                                            <input type="file" class="btn btn-secondary btn-user btn-block" name="imagem">
+                                           <b><p>Imagem atual:</p></b><img src="img"<?php echo $imagem;?> alt="">
+                                           <b><p>Definir nova imagem:</p><input type="file" name="imagem" class="btn btn-secondary btn-user btn-block">
                                         </div>
                                         <div class="form-group">
                                             <h2 class="form-control h6 bg-danger text-white"><label>Selecione as Categorias:</h2>
 <?php
-            include 'banco.php';
-            $conn = conectar();
-            $sql = "SELECT * FROM categoria ORDER BY nome";
+            $sql = "SELECT * FROM Categoria ORDER BY nome";
             $result = mysqli_query($conn, $sql);
     
             if (mysqli_num_rows($result) > 0) {
                 while($row = mysqli_fetch_assoc($result)) {
-                    echo "<input type='radio' name='categoria' value='".$row["idCategoria"]."'>".$row["nome"]."<br />";
+                    echo "<input type='radio' name='categoria' value='".$row["idCategoria"]."'";
+
+                    if ($row["idCategoria"] == $idCategoria) {
+                        echo "checked";
+                    }
+
+                    echo ">".$row["nome"]."<br />";
                 }
                 desconectar($conn);
                 
@@ -131,12 +168,12 @@ if(isset($_SESSION["nome"])){
 ?>
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" class="form-control form-control-user" name="preco" placeholder="Preço">
+                                            <input type="text" class="form-control form-control-user" name="preco" value="<?php echo $preco;?>" placeholder="Preço">
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" class="form-control form-control-user" name="descricao" placeholder="Descrição">
+                                            <input type="text" class="form-control form-control-user" name="descricao" value="<?php echo $descricao;?>" placeholder="Descrição">
                                         </div>
-                                        <input type="submit" value="Cadastrar" class="btn btn-primary btn-user btn-block">
+                                        <input type="submit" value="Editar" class="btn btn-primary btn-user btn-block">
                                     </form>
                                     <hr>
                                 </div>

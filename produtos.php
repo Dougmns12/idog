@@ -109,51 +109,56 @@ if(isset($_SESSION["nome"])){
     $sql = "SELECT * FROM produto ORDER BY nome";
     $result = mysqli_query($conn, $sql);
     
-    echo "<ul>";
+    echo "<div class='row'>";
 
     if (mysqli_num_rows($result) > 0) {
         while($row = mysqli_fetch_assoc($result)) {
-            
-            echo "<li>".$row["nome"]."  | <a class='btn btn-info ' href='editar_produto.php?id=".$row["idProduto"]."'>Editar</a> 
-            | <a class='btn btn-danger ' href='banco_apagar_produto.php?id=".$row["idProduto"]."'>Apagar</a> <li/> ";
+        echo "<div class='col-xl-4 col-lg-4 col-sm-6'>";
+        echo "<h1 class='h3 card card-boody shadow p-4 mb-5 '>".$row["nome"]."<hr> <img src='img/".$row["imagem"]."'><hr>"."<p class='h6'> <b>Categoria</b> ".$row["idCategoria"]. "<p class='h6'> <b>Preço R$</b> ".$row["preco"]. "<p class='h6'> <b>Descrição:</b> ".$row["descricao"]." <br/> <br/> | <a class='btn btn-info' href='editar_produto.php?id=".$row["idProduto"]."'>Editar</a> 
+            | <a class='btn btn-danger ' href='banco_apagar_produto.php?id=".$row["idProduto"]."'>Apagar</a> </li> ";
             echo "<br />";
+        echo "</div>" ;
+
+
         }
         desconectar($conn);
 
     } else {
         desconectar($conn);
         echo "<br/>";
+        echo "<ul>";
         echo "<li> Nenhum produto cadastrado </li>";
+        echo "</ul>";
     } 
-    echo "</ul>";
+    echo "</div>";
 ?>
                     <!-- Content Row -->
-                    <div class="row">
-                        <!-- bloco 1 -->
-                        <div class="col-xl-4 col-lg-5 col-sm-6">
+                    <!-- <div class="row">
+                        bloco 1 -->
+                        <!-- <div class="col-xl-4 col-lg-5 col-sm-6">
                             <div class="card shadow mb-4">
-                                <!-- Card Header - Dropdown -->
-                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                Card Header - Dropdown -->
+                                <!-- <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                     <h6 class="m-0 font-weight-bold text-primary">Cachorro-quente do Chef</h6>
                                     <div class="dropdown no-arrow">
                                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
                                         </a>
 
-                                        <!-- Edição dos cards -->
-                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink" style="">
+                                        Edição dos cards -->
+                                        <!-- <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink" style="">
                                             <div class="dropdown-header">Configurações</div>
-                                            <a class="dropdown-item" href="#">Excluir</a>
-                                            <a class="dropdown-item" href="#">Editar</a>
-                                            <!-- <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Something else here</a> -->
+                                           < "<a class='dropdown-item' href='#'>'Excluir'</a> 
+                                           <a class='dropdown-item' href='#'>'Editar'</a>" ?>
+                                        <div class="dropdown-divider"></div> -->
+                                            <!-- <a class="dropdown-item" href="#">Something else here</a> 
                                         </div>
 
                                     </div>
-                                </div>
-                                
+                                </div> -->
+                        
                                 <!-- Card Body -->
-                                <div class="card-body">
+                                <!-- <div class="card-body">
                                     <div class="chart-pie pt-2 pb-2">
                                         <img class="img-fluid" src="img/chef.jpg" alt="">
                                     </div>
@@ -172,8 +177,8 @@ if(isset($_SESSION["nome"])){
                                     </div>
                                 </div>
                             </div>
-                        </div>
-</div>
+                        </div> -->
+<!-- </div> -->
 
                 </div>
 

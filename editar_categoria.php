@@ -3,12 +3,11 @@ session_start();
 if(isset($_SESSION["nome"])){
 
 
-
     $id = $_GET["id"];
 
     include 'banco.php';
     $conn = conectar();
-    $sql = "SELECT * FROM categoria WHERE id=$id";
+    $sql = "SELECT * FROM categoria WHERE idcategoria=$id";
     $result = mysqli_query($conn, $sql);
 
     if(mysqli_num_rows($result) > 0){
@@ -120,10 +119,11 @@ if(isset($_SESSION["nome"])){
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Editar categoria</h1>
                                     </div>
-                                    <form action="banco_atualizar_categoria.php" method="get" class="user">
+                                    <form action="banco_atualizar_categoria.php" method="post" class="user">
                                         <div class="form-group">
-                                            <input type="text" class="form-control form-control-user" name="nome" value="<?php echo '$nome;'?>" id="id" 
-                                            aria-describedby="emailHelp" placeholder="Nome do produto">
+                                            <input type="text" class="form-control form-control-user" name="nome" value="<?php echo $nome;?>" id="id" 
+                                            aria-describedby="emailHelp">
+                                            <input type="hidden" name="id" value="<?php echo $id;?>">
                                         </div>
                                         <input type="submit" value="Atualizar" class="btn btn-primary btn-user btn-block">
                                     </form>
